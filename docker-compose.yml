@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  golang:
+    image: golang:1.22-alpine
+    volumes:
+      - .:/code:cached
+    working_dir: /code
+    environment:
+      - GOPATH=/code/.go
+
+  test-server-1:
+    image: halverneus/static-file-server:latest
+    volumes:
+      - ./testdata:/web:delegated
+
+  test-server-2:
+    image: halverneus/static-file-server:latest
+    volumes:
+      - ./testdata:/web:delegated
