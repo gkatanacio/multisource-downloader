@@ -46,6 +46,15 @@ func sourceUrlsSortedByEstLatency(srcFileMetas []sourceFileMetadata) []string {
 	return sourceUrls
 }
 
+// min returns the minimum of two numbers.
+func min(a, b int64) int64 {
+	if a < b {
+		return a
+	}
+
+	return b
+}
+
 // GetMD5Hash calculates the MD5 hash of the file contents and returns
 // the hex encoding.
 func GetMD5Hash(file *os.File) (string, error) {
@@ -61,13 +70,4 @@ func GetMD5Hash(file *os.File) (string, error) {
 	}
 
 	return fmt.Sprintf("%x", md5.Sum(b)), nil
-}
-
-// min returns the minimum of two numbers.
-func min(a, b int64) int64 {
-	if a < b {
-		return a
-	}
-
-	return b
 }
