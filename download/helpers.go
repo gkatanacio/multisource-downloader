@@ -12,11 +12,14 @@ import (
 // consistency across the sources as well.
 func allSourcesMatchFileMetadata(srcFileMetas []sourceFileMetadata, checkETag bool) bool {
 	for i := 1; i < len(srcFileMetas); i++ {
-		if srcFileMetas[i].size != srcFileMetas[i-1].size {
+		sfmA := srcFileMetas[i-1]
+		sfmB := srcFileMetas[i]
+
+		if sfmA.size != sfmB.size || sfmA.contentType != sfmB.contentType {
 			return false
 		}
 
-		if checkETag && srcFileMetas[i].eTag != srcFileMetas[i-1].eTag {
+		if checkETag && sfmA.eTag != sfmB.eTag {
 			return false
 		}
 	}

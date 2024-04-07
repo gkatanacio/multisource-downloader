@@ -133,8 +133,9 @@ func (s *Service) fetchFileMetadataFromSources(sourceUrls []string) ([]sourceFil
 				url:        url,
 				estLatency: estLatency,
 				fileMetadata: fileMetadata{
-					size: resp.ContentLength,
-					eTag: strings.Trim(resp.Header.Get("ETag"), `"`),
+					size:        resp.ContentLength,
+					contentType: resp.Header.Get("Content-Type"),
+					eTag:        strings.Trim(resp.Header.Get("ETag"), `"`),
 				},
 			}
 

@@ -14,8 +14,9 @@ type Options struct {
 
 // fileMetadata is comprised of relevant metadata for a download file.
 type fileMetadata struct {
-	size int64
-	eTag string
+	size        int64
+	contentType string
+	eTag        string
 }
 
 // sourceFileMetadata represents the metadata of a file along with
