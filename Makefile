@@ -16,5 +16,5 @@ test:
 
 .PHONY: build
 build:
-	# possible values for target: https://github.com/golang/go/blob/58c5db3169c801737cb0e0ed4886554763c861eb/src/go/build/syslist.go#L14
+	# possible values for GOOS: https://github.com/golang/go/blob/58c5db3169c801737cb0e0ed4886554763c861eb/src/go/build/syslist.go#L14
 	docker compose run --rm -e GOOS="$(target)" golang go build -ldflags="-s -w" -o ./bin/msdl
