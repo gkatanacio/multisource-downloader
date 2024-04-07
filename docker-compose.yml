@@ -10,11 +10,11 @@ services:
       - GOPATH=/code/.go
 
   test-server-1:
-    image: halverneus/static-file-server:latest
+    image: halverneus/static-file-server:v1.8.10
     volumes:
       - ./testdata:/web:delegated
 
   test-server-2:
-    image: halverneus/static-file-server:latest
+    image: halverneus/static-file-server:v1.8.10
     volumes:
       - ./testdata:/web:delegated
