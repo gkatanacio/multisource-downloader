@@ -1,6 +1,6 @@
 # multisource-downloader
 
-Download accelerator that allows fetching a file from multiple sources concurrently.
+Download accelerator that supports fetching a file from multiple sources concurrently.
 
 ## Prerequisites
 
