@@ -46,9 +46,9 @@ func sourceUrlsSortedByEstLatency(srcFileMetas []sourceFileMetadata) []string {
 	return sourceUrls
 }
 
-// getMD5Hash calculates the MD5 hash of the file contents and returns
+// GetMD5Hash calculates the MD5 hash of the file contents and returns
 // the hex encoding.
-func getMD5Hash(file *os.File) (string, error) {
+func GetMD5Hash(file *os.File) (string, error) {
 	fileInfo, err := file.Stat()
 	if err != nil {
 		return "", err

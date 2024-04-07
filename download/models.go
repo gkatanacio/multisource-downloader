@@ -1,6 +1,7 @@
 package download
 
 import (
+	"os"
 	"time"
 )
 
@@ -11,6 +12,9 @@ type Options struct {
 	CheckETag    bool
 	DestFilePath string
 }
+
+// ETagCalculator represents a function that calculates the ETag of a file.
+type ETagCalculator func(file *os.File) (string, error)
 
 // fileMetadata is comprised of relevant metadata for a download file.
 type fileMetadata struct {

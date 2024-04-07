@@ -19,7 +19,7 @@ var rootCmd = &cobra.Command{
 		return cobra.MinimumNArgs(1)(cmd, args)
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
-		downloadService := download.NewService(downloadOpts)
+		downloadService := download.NewService(downloadOpts, download.GetMD5Hash)
 		return downloadService.Download(args)
 	},
 }

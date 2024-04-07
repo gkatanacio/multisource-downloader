@@ -27,13 +27,15 @@ const suffixOngoingDownload = ".download"
 
 // Service is the service layer that contains operations for downloading.
 type Service struct {
-	opts       Options
-	httpClient *http.Client
+	opts          Options
+	calculateETag ETagCalculator
+	httpClient    *http.Client
 }
 
-func NewService(opts Options) *Service {
+func NewService(opts Options, calculateETag ETagCalculator) *Service {
 	return &Service{
-		opts: opts,
+		opts:          opts,
+		calculateETag: calculateETag,
 		httpClient: &http.Client{
 			Timeout: time.Second * time.Duration(opts.Timeout),
 		},
@@ -74,12 +76,12 @@ func (s *Service) Download(sourceUrls []string) error {
 	}
 
 	if s.opts.CheckETag && len(fileMetadata.eTag) > 0 {
-		md5Hash, err := getMD5Hash(ongoingDownloadFile)
+		calculatedETag, err := s.calculateETag(ongoingDownloadFile)
 		if err != nil {
 			return err
 		}
 
-		if md5Hash != fileMetadata.eTag {
+		if calculatedETag != fileMetadata.eTag {
 			return ErrETagMismatch
 		}
 	}

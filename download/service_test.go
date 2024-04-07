@@ -69,7 +69,7 @@ func Test_Service_Download_Success(t *testing.T) {
 
 	for scenario, tc := range testCases {
 		t.Run(scenario, func(t *testing.T) {
-			downloadService := download.NewService(tc.opts)
+			downloadService := download.NewService(tc.opts, download.GetMD5Hash)
 
 			err := downloadService.Download(tc.sourceUrls)
 			assert.NoError(t, err)
@@ -109,7 +109,7 @@ func Test_Service_Download_Failed(t *testing.T) {
 
 	for scenario, tc := range testCases {
 		t.Run(scenario, func(t *testing.T) {
-			downloadService := download.NewService(tc.opts)
+			downloadService := download.NewService(tc.opts, nil)
 
 			err := downloadService.Download(tc.sourceUrls)
 			assert.Error(t, err)
