@@ -41,7 +41,7 @@ func NewService(opts Options) *Service {
 }
 
 // Download attempts to download a file from the given sources in a concurrent manner (i.e., in chunks).
-// This creates a temporary file while the download is ongoing and renames it to the actual configured
+// This creates a temporary file while the download is ongoing and moves it to the actual configured
 // destination file once the download is successfully completed.
 func (s *Service) Download(sourceUrls []string) error {
 	if len(sourceUrls) == 0 {
