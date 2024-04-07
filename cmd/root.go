@@ -12,7 +12,7 @@ var downloadOpts download.Options
 
 var rootCmd = &cobra.Command{
 	Use:          "msdl [space-delimited URLs]",
-	Short:        "Accelerate your download by fetching the file from multiple sources concurrently.",
+	Short:        "Download accelerator that allows fetching a file from multiple sources concurrently.",
 	Example:      "./msdl -c 8 -t 10 --etag -f destfile.txt http://source1.com/a.txt http://source2.com/a.txt http://source3.com/a.txt",
 	SilenceUsage: true,
 	Args: func(cmd *cobra.Command, args []string) error {
