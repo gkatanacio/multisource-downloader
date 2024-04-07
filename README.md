@@ -38,7 +38,7 @@ $ make test
 $ make build target={target OS}
 ```
 - generates `msdl` inside `bin/` directory
-- possible values for `target` can be found [here](https://github.com/golang/go/blob/58c5db3169c801737cb0e0ed4886554763c861eb/src/go/build/syslist.go#L14)
+- possible values for `target` can be found [here](https://github.com/golang/go/blob/58c5db3169c801737cb0e0ed4886554763c861eb/src/go/build/syslist.go#L14-L33)
 - example: `make build target=linux`
 
 ### CLI reference
