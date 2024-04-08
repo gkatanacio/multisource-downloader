@@ -179,6 +179,13 @@ func (s *Service) downloadFileContents(sourceUrls []string, fileMetadata fileMet
 			if err != nil {
 				// try to download chunk from other sources (priority based on sourceUrls ordering)
 				for j := 0; j < len(sourceUrls) && err != nil; j++ {
+					// stop retrying if context already done (e.g., error returned in another goroutine)
+					select {
+					case <-ctx.Done():
+						return ctx.Err()
+					default:
+					}
+
 					if j == srcIdxInitAttempt {
 						continue
 					}
