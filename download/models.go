@@ -10,6 +10,7 @@ type Options struct {
 	Connections  uint
 	Timeout      uint
 	CheckETag    bool
+	Quiet        bool
 	DestFilePath string
 }
 

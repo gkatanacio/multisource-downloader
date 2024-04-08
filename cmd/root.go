@@ -35,6 +35,7 @@ func init() {
 	rootCmd.Flags().UintVarP(&downloadOpts.Connections, "connections", "c", 5, "max number of concurrent connections")
 	rootCmd.Flags().UintVarP(&downloadOpts.Timeout, "timeout", "t", 10, "timeout for each connection in seconds")
 	rootCmd.Flags().BoolVar(&downloadOpts.CheckETag, "etag", false, "check ETag match (using MD5 hash of downloaded file) if available")
+	rootCmd.Flags().BoolVarP(&downloadOpts.Quiet, "quiet", "q", false, "disable logging to stdout")
 	rootCmd.Flags().StringVarP(&downloadOpts.DestFilePath, "file", "f", "", "destination file path")
 
 	rootCmd.MarkFlagRequired("file")

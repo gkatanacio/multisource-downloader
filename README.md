@@ -62,5 +62,6 @@ $ ./msdl -f destfile.txt http://source1.com/a.txt http://source2.com/a.txt http:
     --etag               check ETag match (using MD5 hash of downloaded file) if available [optional; default false]
 -f, --file string        destination file path [required for download]
 -h, --help               help for msdl
+-q, --quiet              disable logging to stdout [optional; default false]
 -t, --timeout uint       timeout for each connection in seconds [optional; default 10]
 ```

@@ -90,7 +90,7 @@ func (s *Service) Download(sourceUrls []string) error {
 		return err
 	}
 
-	fmt.Println("Download complete:", s.opts.DestFilePath)
+	s.logln("Download complete:", s.opts.DestFilePath)
 
 	return nil
 }
@@ -190,7 +190,7 @@ func (s *Service) downloadFileContents(sourceUrls []string, fileMetadata fileMet
 				}
 			}
 
-			fmt.Println("chunk downloaded from", url)
+			s.logln("chunk downloaded from", url)
 
 			_, err = io.Copy(io.NewOffsetWriter(destFile, offset), bytes.NewReader(chunk))
 			return err
@@ -219,4 +219,11 @@ func (s *Service) fetchChunk(ctx context.Context, url string, start, end int64) 
 	}
 
 	return io.ReadAll(resp.Body)
+}
+
+// logln prints the arguments (separated by space) and a newline if the service is not in quiet mode.
+func (s *Service) logln(args ...any) {
+	if !s.opts.Quiet {
+		fmt.Println(args...)
+	}
 }
