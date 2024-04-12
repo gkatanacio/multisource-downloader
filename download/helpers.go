@@ -55,6 +55,12 @@ func min(a, b int64) int64 {
 	return b
 }
 
+// printErr prints the error message to stderr.
+// Could be helpful in debugging.
+func printErr(err error) {
+	fmt.Fprintln(os.Stderr, err)
+}
+
 // GetMD5Hash calculates the MD5 hash of the file contents and returns
 // the hex encoding.
 func GetMD5Hash(file *os.File) (string, error) {

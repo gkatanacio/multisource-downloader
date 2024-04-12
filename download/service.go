@@ -177,6 +177,8 @@ func (s *Service) downloadFileContents(sourceUrls []string, fileMetadata fileMet
 
 			chunk, err := s.fetchChunk(ctx, url, offset, limit)
 			if err != nil {
+				printErr(fmt.Errorf("failed initial download of chunk %d from %s: %w", i, url, err))
+
 				// try to download chunk from other sources (priority based on sourceUrls ordering)
 				for j := 0; j < len(sourceUrls) && err != nil; j++ {
 					// stop retrying if context already done (e.g., error returned in another goroutine)
@@ -189,15 +191,20 @@ func (s *Service) downloadFileContents(sourceUrls []string, fileMetadata fileMet
 					if j == srcIdxInitAttempt {
 						continue
 					}
+
 					url = sourceUrls[j]
 					chunk, err = s.fetchChunk(ctx, url, offset, limit)
+					if err != nil {
+						printErr(fmt.Errorf("failed download retry of chunk %d from %s: %w", i, url, err))
+					}
 				}
+
 				if err != nil {
 					return ErrFailedChunkDownloadAllSources
 				}
 			}
 
-			s.logln("chunk downloaded from", url)
+			s.logln(fmt.Sprintf("chunk %d downloaded from %s", i, url))
 
 			_, err = io.Copy(io.NewOffsetWriter(destFile, offset), bytes.NewReader(chunk))
 			return err
